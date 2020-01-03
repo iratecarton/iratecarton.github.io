@@ -5,40 +5,195 @@
         <title>iratecarton's website</title>
     </head>
     <style>
-        .photo {
-            width: 200px;
-        }
-        body {
-            padding-left: 10%;
-            padding-right: 10%;
-            padding-top: 5%; 
-            
-            background: rgb(200, 200, 255);
-        }
-      .1p {
-           
-            font-size: 100px;
-            }
         
-   
-       
-        .2p {
-            font-size: 100px;
-            text-align = right;
-        }
-        img {
-            font-size:100px;
-        }
     </style>
     <body>
-<h1>cc book club</h1>
-<p class= "1p">we are a small book club originating in a cc we read and write books the founders include noah, lucas, and shamus </p>
-<p class= "2p">contact info<br> Noah: pittboy04@gmail.com</p>
-        <p>we have multiple positions including:<br> scribe <br> storyline <br> dress ups <br> polishers</p>        
-        <p>we have presidents and vice  presidents where we vote every month for who it shall be the current president is lucas and the current vice president is noah</p>
-        <p>the books we have read are<br> percy jackson #1</p>
-        <p>the books we have written are <br> </p>
-        <h3>if you want to become a member than email the third declension noun endings latin dative plural to n young</h3>
-        <h4> full names witheld for discretion</h4>
+        <p>#include <Servo.h><br>
+<br>
+#define trigPin 5<br>
+<br>
+#define echoPin 4<br>
+<br>
+<br>
+float duration;<br>
+<br>
+float distance;<br>
+<br>
+<br>
+int pinServo1;<br>
+<br>
+int pinServo2;<br>
+<br>
+int pinServo3;<br>
+<br>
+int pinServo4;<br>
+<br>
+<br>
+int servoSpeed1;<br>
+<br>
+int servoSpeed2;<br>
+<br>
+int servoSpeed3;<br>
+    <br>        
+int servoSpeed4;<br>
+<br>
+<br>
+int servoStop1;<br>
+<br>
+int servoStop2;<br>
+<br>
+int servoStop3;<br>
+<br>
+int servoStop4;<br>
+<br>
+<br>
+int speed1;<br>
+<br>
+int speed2;<br>
+<br>
+int speed3;<br>
+<br>
+int speed4;<br>
+<br>
+<br>
+Servo FRServo;<br>
+<br>
+Servo FLServo;<br>
+<br>
+Servo BRServo;<br>
+<br>
+Servo BLServo;<br>
+<br>
+void setup() {<br>
+  <br>
+   <br>
+   Serial.begin (9600);<br>
+  <br>
+  <br>
+  pinMode (trigPin, OUTPUT);<br>
+  <br>
+  pinMode (echoPin, INPUT);<br>
+<br>
+  <br>
+   speed1 = -1000;<br>
+  <br>
+   speed2 = 1000;<br>
+   <br>
+   speed3 = -1000;<br>
+   <br>
+   speed4 = 1000;<br>
+  <br>
+  <br>
+  pinServo1 = 13;<br>
+  <br>
+  pinServo2 = 10;<br>
+  <br>
+  pinServo3 = 11;<br>
+  <br>
+  pinServo4 = 12;<br>
+  <br>
+  <br>
+  FRServo.attach(pinServo1);<br>
+  <br>
+  FLServo.attach(pinServo2);<br>
+  <br>
+  BRServo.attach(pinServo3);<br>
+  <br>
+  BLServo.attach(pinServo4);<br>
+  <br>
+  <br>
+  servoStop1 = 1500;<br>
+  <br>
+  servoStop2 = 1500;<br>
+  <br>
+  servoStop3 = 1500;<br>
+      <br>      
+  servoStop4 = 1500;<br>
+<br>
+<br>
+}<br>
+<br>
+void loop() {<br>
+  <br>
+  <br>
+  digitalWrite(trigPin, LOW);<br>
+  <br>
+  delayMicroseconds(2);<br>
+  <br>
+  digitalWrite(trigPin, HIGH);<br>
+  <br>
+  delayMicroseconds(10);<br>
+  <br>
+  digitalWrite(trigPin, LOW);<br>
+<br>
+<br>
+  duration = pulseIn(echoPin, HIGH);<br>
+<br>
+  distance = (duration / 2) * 0.0343;<br>
+<br>
+  <br>
+  servoSpeed1 = servoStop1 + speed1;<br>
+  <br>
+  servoSpeed2 = servoStop2 + speed2;<br>
+  <br>
+  servoSpeed3 = servoStop3 + speed3;<br>
+  <br>
+  servoSpeed4 = servoStop4 + speed4;<br>
+  <br>
+  <br>
+  runServo1(servoSpeed1);<br>
+  <br>
+  runServo2(servoSpeed2);<br>
+  <br>
+  runServo3(servoSpeed3);<br>
+  <br>
+  runServo4(servoSpeed4);<br>
+<br>
+<br>
+  if (distance <= 15){<br>
+<br>
+    speed1 = 0;<br>
+    <br>
+    speed2 = 0;<br>
+    <br>
+    speed3 = 0;<br>
+    <br>
+    speed4 = 0;<br>
+   }<br>
+      else {<br>
+        <br>
+        speed1 = -1000;<br>
+        <br>
+        speed2 = 1000;<br>
+        <br>
+        speed3 = -1000;<br>
+        <br>
+        speed4 = 1000;<br>
+      }<br>
+}<br>
+<br>
+void runServo1(int spd){<br>
+  <br>
+  FRServo.writeMicroseconds(spd);<br>
+<br>
+}<br>
+<br>
+void runServo2(int spd){<br>
+  <br>
+  FLServo.writeMicroseconds(spd);<br>
+<br>
+}<br>
+<br>
+void runServo3(int spd){<br>
+ <br>
+  BRServo.writeMicroseconds(spd);<br>
+<br>
+}<br>
+<br>
+void runServo4(int spd){<br>
+  <br>
+  BLServo.writeMicroseconds(spd);<br>
+<br>
+}</p>
     </body>
 </html>
